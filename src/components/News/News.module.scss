@@ -1,0 +1,19 @@
+.newsSnippets {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .newsSnippets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1440px) {
+  .newsSnippets {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}

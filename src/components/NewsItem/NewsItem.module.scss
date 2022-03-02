@@ -1,0 +1,50 @@
+@use '../App/App';
+
+.newsItems {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.newsItem {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, auto);
+  gap: 15px;
+}
+
+.backLink {
+  text-decoration: none;
+  transition: color 0.3s;
+  color: App.$primary-font-color;
+}
+
+.backLink:hover {
+  color: App.$secondary-font-color;
+}
+
+.articleDetails {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  color: App.$secondary-font-color;
+}
+
+.articleDetail {
+  font-weight: bold;
+}
+
+.detailsHeader {
+  font-size: 12px;
+}
+
+.title {
+  grid-column: span 2;
+  color: App.$primary-font-color;
+}
+
+.link {
+  grid-column: span 2;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
