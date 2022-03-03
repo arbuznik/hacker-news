@@ -27,17 +27,19 @@ const News = () => {
     return (
       <Spinner/>
     );
-  } if (pageStatus === 'failed') {
-    return <p>{errorMessage}</p>;
-  } else {
-    return (
-      <section>
-        <ul className={styles.newsSnippets}>
-          {newsItems.map((item) => <NewsSnippet item={item} key={item.id}/>)}
-        </ul>
-      </section>
-    );
   }
+
+  if (pageStatus === 'failed') {
+    return <p>{errorMessage}</p>;
+  }
+
+  return (
+    <section>
+      <ul className={styles.newsSnippets}>
+        {newsItems.map((item) => <NewsSnippet item={item} key={item.id}/>)}
+      </ul>
+    </section>
+  );
 };
 
 export default News;

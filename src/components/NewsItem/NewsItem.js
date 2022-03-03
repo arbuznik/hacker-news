@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './NewsItem.module.scss';
 import {
@@ -12,6 +12,7 @@ import {
   updateNewsItem,
 } from '../../utils/newsSlice';
 import Spinner from '../Spinner/Spinner';
+import Comments from "../Comments/Comments";
 
 const NewsItem = () => {
   const dispatch = useDispatch();
@@ -48,14 +49,18 @@ const NewsItem = () => {
         <Spinner/>
       </>
     );
-  } if (pageStatus === 'failed') {
+  }
+
+  if (pageStatus === 'failed') {
     return (
       <>
         <BackToNewsLink/>
         <p>{errorMessage}</p>
       </>
     );
-  } if (pageStatus === 'succeeded') {
+  }
+
+  if (pageStatus === 'succeeded') {
     return (
       <div className={styles.newsItems}>
         <nav>
@@ -63,13 +68,18 @@ const NewsItem = () => {
         </nav>
         <article className={styles.newsItem}>
           {title && <h1 className={styles.title}>{title}</h1>}
-          {url && <a className={styles.link} href={url}>{url}</a>}
-          {author && <div className={styles.articleDetails}>
+          {url && <a className={styles.link} href={url} target="_blank">{url}</a>}
+          {author && (
+            <div className={styles.articleDetails}>
             <p className={styles.detailsHeader}>Published by</p>
-            <p className={styles.articleDetail}>{author}</p></div>}
-          {humanReadableTime && <div className={styles.articleDetails}>
+            <p className={styles.articleDetail}>{author}</p></div>
+          )}
+          {humanReadableTime && (
+            <div className={styles.articleDetails}>
             <p className={styles.detailsHeader}>Published on</p>
-            <p className={styles.articleDetail}><time dateTime={dateTime}>{humanReadableTime}</time></p></div>}
+            <p className={styles.articleDetail}><time dateTime={dateTime}>{humanReadableTime}</time></p></div>
+          )}
+          <Comments/>
         </article>
       </div>
     );

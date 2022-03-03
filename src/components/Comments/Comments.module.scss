@@ -1,0 +1,15 @@
+@use '../App/App';
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 100%;
+  grid-column: span 2;
+}
+
+.commentsCount {
+  color: App.$primary-font-color;
+  font-size: 20px;
+  margin-top: 20px;
+}
