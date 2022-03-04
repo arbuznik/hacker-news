@@ -40,6 +40,8 @@ export const fetchComments = createAsyncThunk('news/fetchComments', async (arg, 
   const state = getState();
   const firstLevelCommentsIds = state.news.item.kids;
 
+  const itemId = state.news.item.id
+
   let queue = [...firstLevelCommentsIds];
   let visited = new Set(queue);
   let allComments = [];
@@ -65,8 +67,9 @@ export const fetchComments = createAsyncThunk('news/fetchComments', async (arg, 
   }
 
   const aliveComments = allComments.filter(comment => !comment.dead && !comment.deleted);
+  const aliveCommentsWithTime = populateItemsWithTime(aliveComments)
 
-  return populateItemsWithTime(aliveComments);
+  return { itemId, comments: aliveCommentsWithTime };
 })
 
 export const fetchNewsItem = createAsyncThunk('news/fetchNewsItem', async ({ newsItemId }, { rejectWithValue  }) => {
@@ -86,6 +89,7 @@ export const newsSlice = createSlice({
   name: 'news',
   initialState: {
     item: {},
+    itemComments: {},
     items: [],
     category: 'newstories',
     resultsPerPage: 10,
@@ -134,7 +138,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchComments.fulfilled, (state, action) => {
         state.commentsStatus = 'succeeded';
-        state.item.comments = action.payload;
+        state.itemComments = action.payload;
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.commentsStatus = 'failed';
@@ -146,6 +150,7 @@ export const newsSlice = createSlice({
 export const { updateNewsItem, updateCategory, updateResultsPerPage } = newsSlice.actions;
 
 export const selectNewsItem = (state) => state.news.item;
+export const selectNewsItemComments = (state) => state.news.itemComments;
 export const selectNewsItems = (state) => state.news.items;
 export const selectCategory = (state) => state.news.category;
 export const selectResultsPerPage = (state) => state.news.resultsPerPage;

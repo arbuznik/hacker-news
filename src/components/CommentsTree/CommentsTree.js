@@ -2,13 +2,13 @@ import styles from "./CommentsTree.module.scss";
 import Comment from "../Comment/Comment";
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectNewsItem } from "../../utils/newsSlice";
+import { selectNewsItemComments } from "../../utils/newsSlice";
 
 const CommentsTree = ({ parentId, level = 0 }) => {
-  const {comments, id} = useSelector(selectNewsItem);
+  const {comments, itemId} = useSelector(selectNewsItemComments);
 
   if (!parentId) {
-    parentId = id;
+    parentId = itemId;
   }
 
   if (!comments) {

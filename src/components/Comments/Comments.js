@@ -1,20 +1,26 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchComments, selectCommentsError, selectCommentsStatus, selectNewsItem } from "../../utils/newsSlice";
+import {
+  fetchComments,
+  selectCommentsError,
+  selectCommentsStatus,
+  selectNewsItem,
+  selectNewsItemComments
+} from "../../utils/newsSlice";
 import styles from "./Comments.module.scss";
 import Spinner from "../Spinner/Spinner";
 import CommentsTree from "../CommentsTree/CommentsTree";
 
 const Comments = () => {
   const dispatch = useDispatch();
-  const { descendants } = useSelector(selectNewsItem);
-
+  const { id, descendants } = useSelector(selectNewsItem);
+  const { itemId } = useSelector(selectNewsItemComments);
 
   const status = useSelector(selectCommentsStatus);
   const error = useSelector(selectCommentsError);
 
   useEffect(() => {
-    if (descendants) {
+    if (descendants && id !== itemId) {
       dispatch(fetchComments());
     }
   }, [descendants])

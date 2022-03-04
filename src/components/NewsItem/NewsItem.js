@@ -24,7 +24,6 @@ const NewsItem = () => {
   const pageStatus = useSelector(selectStatus);
   const errorMessage = useSelector(selectError);
 
-  const { title, by: author, dateTime, humanReadableTime, url } = useSelector(selectNewsItem);
   const newsItems = useSelector(selectNewsItems);
 
   useEffect(() => {
@@ -40,6 +39,8 @@ const NewsItem = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { title, by: author, dateTime, humanReadableTime, url } = useSelector(selectNewsItem);
 
   const BackToNewsButton = () => <button onClick={() => navigate(-1)} className={styles.backButton}>&#8592; Back to news list</button>;
 
@@ -64,9 +65,7 @@ const NewsItem = () => {
   if (pageStatus === 'succeeded') {
     return (
       <div className={styles.newsItems}>
-        <nav>
-          <BackToNewsButton/>
-        </nav>
+        <BackToNewsButton/>
         <article className={styles.newsItem}>
           {title && <h1 className={styles.title}>{title}</h1>}
           {url && <a className={styles.link} href={url} target="_blank">{url}</a>}
