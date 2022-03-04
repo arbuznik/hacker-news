@@ -1,8 +1,8 @@
 @use '../App/App';
 
 .comments {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto minmax(300px, auto);
   row-gap: 20px;
   width: 100%;
   grid-column: span 2;

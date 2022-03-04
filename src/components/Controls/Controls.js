@@ -30,7 +30,7 @@ const Controls = () => {
 
   return (
     <div className={styles.controls}>
-      <button onClick={handleRefreshClick} className={styles.button}>Refresh</button>
+      <button onClick={handleRefreshClick} className={styles.button}>Refresh &#128260;</button>
       <select onChange={handleCategoryChange} className={styles.select} value={currentCategory}>
         <option name="newstories" value="newstories">Newest</option>
         <option name="topstories" value="topstories">Hottest</option>

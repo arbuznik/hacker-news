@@ -13,13 +13,17 @@
   gap: 15px;
 }
 
-.backLink {
-  text-decoration: none;
+.backButton {
+  margin-right: auto;
+  outline: none;
+  border: none;
+  padding: 5px 10px 5px 0;
+  background-color: #FFF;
   transition: color 0.3s;
   color: App.$primary-font-color;
 }
 
-.backLink:hover {
+.backButton:hover {
   color: App.$secondary-font-color;
 }
 

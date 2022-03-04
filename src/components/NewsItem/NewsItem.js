@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styles from './NewsItem.module.scss';
 import {
   fetchNewsItem,
@@ -16,6 +17,7 @@ import Comments from "../Comments/Comments";
 
 const NewsItem = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { newsItemId } = useParams();
 
@@ -23,7 +25,6 @@ const NewsItem = () => {
   const errorMessage = useSelector(selectError);
 
   const { title, by: author, dateTime, humanReadableTime, url } = useSelector(selectNewsItem);
-
   const newsItems = useSelector(selectNewsItems);
 
   useEffect(() => {
@@ -40,12 +41,12 @@ const NewsItem = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const BackToNewsLink = () => <Link to={'/'} className={styles.backLink}>&#8592; Back to news list</Link>;
+  const BackToNewsButton = () => <button onClick={() => navigate(-1)} className={styles.backButton}>&#8592; Back to news list</button>;
 
   if (pageStatus === 'loading' || pageStatus === 'idle') {
     return (
       <>
-        <BackToNewsLink/>
+        <BackToNewsButton/>
         <Spinner/>
       </>
     );
@@ -54,7 +55,7 @@ const NewsItem = () => {
   if (pageStatus === 'failed') {
     return (
       <>
-        <BackToNewsLink/>
+        <BackToNewsButton/>
         <p>{errorMessage}</p>
       </>
     );
@@ -64,7 +65,7 @@ const NewsItem = () => {
     return (
       <div className={styles.newsItems}>
         <nav>
-          <BackToNewsLink/>
+          <BackToNewsButton/>
         </nav>
         <article className={styles.newsItem}>
           {title && <h1 className={styles.title}>{title}</h1>}

@@ -9,6 +9,7 @@ const Comments = () => {
   const dispatch = useDispatch();
   const { descendants } = useSelector(selectNewsItem);
 
+
   const status = useSelector(selectCommentsStatus);
   const error = useSelector(selectCommentsError);
 

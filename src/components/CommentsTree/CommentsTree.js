@@ -11,6 +11,10 @@ const CommentsTree = ({ parentId, level = 0 }) => {
     parentId = id;
   }
 
+  if (!comments) {
+    return null;
+  }
+
   const commentsToRender = comments.filter(comment => {
     return comment.parent === parentId;
   })
