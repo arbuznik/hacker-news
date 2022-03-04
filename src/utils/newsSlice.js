@@ -27,9 +27,9 @@ async function getItemsByIds(itemIds) {
 
 export const fetchNews = createAsyncThunk('news/fetchBooks', async (arg, { getState }) => {
   const state = getState();
-  const { resultsPerPage } = state.news;
+  const { category, resultsPerPage } = state.news;
 
-  const response = await getNews();
+  const response = await getNews(category);
   const newsToLoad = response.data.slice(0, resultsPerPage);
 
   let newsItems = await getItemsByIds(newsToLoad);
@@ -88,7 +88,8 @@ export const newsSlice = createSlice({
       comments: [...mockData],
     },
     items: [],
-    resultsPerPage: 4,
+    category: 'newstories',
+    resultsPerPage: 10,
     status: 'idle',
     error: null,
     commentsStatus: 'idle',
@@ -98,6 +99,12 @@ export const newsSlice = createSlice({
     updateNewsItem: (state, action) => {
       state.item = action.payload;
     },
+    updateCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    updateResultsPerPage: (state, action) => {
+      state.resultsPerPage = action.payload;
+    }
   },
   extraReducers(builder) {
     builder
@@ -137,10 +144,12 @@ export const newsSlice = createSlice({
   },
 });
 
-export const { updateNewsItem } = newsSlice.actions;
+export const { updateNewsItem, updateCategory, updateResultsPerPage } = newsSlice.actions;
 
 export const selectNewsItem = (state) => state.news.item;
 export const selectNewsItems = (state) => state.news.items;
+export const selectCategory = (state) => state.news.category;
+export const selectResultsPerPage = (state) => state.news.resultsPerPage;
 export const selectStatus = (state) => state.news.status;
 export const selectError = (state) => state.news.error;
 export const selectCommentsStatus = (state) => state.news.commentsStatus;

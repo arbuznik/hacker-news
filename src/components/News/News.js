@@ -5,6 +5,7 @@ import NewsSnippet from '../NewsSnippet/NewsSnippet';
 import styles from './News.module.scss';
 import Spinner from '../Spinner/Spinner';
 import { fetchNews, selectError, selectNewsItems, selectStatus } from '../../utils/newsSlice';
+import Controls from "../Controls/Controls";
 
 const News = () => {
   const dispatch = useDispatch();
@@ -19,10 +20,6 @@ const News = () => {
     }
   }, []);
 
-  // const handleRefreshNews = () => {
-  //   dispatch((fetchNews));
-  // };
-
   if (pageStatus === 'loading' || pageStatus === 'idle') {
     return (
       <Spinner/>
@@ -34,7 +31,8 @@ const News = () => {
   }
 
   return (
-    <section>
+    <section className={styles.news}>
+      <Controls/>
       <ul className={styles.newsSnippets}>
         {newsItems.map((item) => <NewsSnippet item={item} key={item.id}/>)}
       </ul>

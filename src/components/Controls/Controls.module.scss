@@ -1,0 +1,25 @@
+@use '../App/App';
+
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 10px;
+}
+
+.button {
+  margin-right: auto;
+  outline: none;
+  border: 1px solid App.$primary-font-color;
+  padding: 5px 10px;
+  background-color: #FFF;
+  border-radius: 3px;
+}
+
+.select {
+  outline: none;
+  border: 1px solid App.$primary-font-color;
+  padding: 5px 10px;
+  background-color: #FFF;
+  border-radius: 3px;
+}
