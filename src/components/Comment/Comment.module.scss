@@ -8,6 +8,10 @@
   color: App.$primary-font-color;
 }
 
+.text {
+  overflow-wrap: anywhere;
+}
+
 .author {
   font-weight: bold;
   margin: 3px 0;
