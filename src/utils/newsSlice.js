@@ -69,15 +69,17 @@ export const fetchComments = createAsyncThunk('news/fetchComments', async (arg, 
   return populateItemsWithTime(aliveComments);
 })
 
-export const fetchNewsItem = createAsyncThunk('news/fetchNewsItem', async ({ newsItemId }) => {
+export const fetchNewsItem = createAsyncThunk('news/fetchNewsItem', async ({ newsItemId }, { rejectWithValue  }) => {
   const newsItem = await getNewsItem(newsItemId);
 
-  if (newsItem) {
-    newsItem.dateTime = getDateTime(newsItem.time)
-    newsItem.humanReadableTime = getHumanReadableTime(newsItem.time)
-
-    return newsItem;
+  if (!newsItem) {
+    return rejectWithValue(null)
   }
+
+  newsItem.dateTime = getDateTime(newsItem.time)
+  newsItem.humanReadableTime = getHumanReadableTime(newsItem.time)
+
+  return newsItem;
 });
 
 export const newsSlice = createSlice({
@@ -125,7 +127,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchNewsItem.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload ? action.error.message: 'No such story';
       })
       .addCase(fetchComments.pending, (state) => {
         state.commentsStatus = 'loading';
