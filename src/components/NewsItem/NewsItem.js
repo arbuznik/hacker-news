@@ -40,7 +40,13 @@ const NewsItem = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { title, by: author, dateTime, humanReadableTime, url } = useSelector(selectNewsItem);
+  const newsItem = useSelector(selectNewsItem);
+
+  if (!newsItem) {
+    return <p>Error loading news item</p>
+  }
+
+  const { title, by: author, dateTime, humanReadableTime, url } = newsItem;
 
   const BackToNewsButton = () => <button onClick={() => navigate(-1)} className={styles.backButton}>&#8592; Back to news list</button>;
 
