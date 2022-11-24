@@ -2,6 +2,8 @@
 
 Frontend implementation of HN. React, Redux-Toolkit-Thunk, SCSS
 
+https://arbuznik-hacker-news.netlify.app/
+
 ### `npm start`
 
 Runs the app in the development mode.\
