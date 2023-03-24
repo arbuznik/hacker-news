@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectNewsItemComments } from "../../utils/newsSlice";
 
-const CommentsTree = ({ parentId, level = 0 }) => {
+const CommentsTree = ({ parentId}) => {
   const {comments, itemId} = useSelector(selectNewsItemComments);
 
   if (!parentId) {
@@ -26,8 +26,8 @@ const CommentsTree = ({ parentId, level = 0 }) => {
   return (
     <ul className={styles.commentsTree}>
       {commentsToRender.map(item => (
-        <Comment key={item.id} item={item} level={level}>
-          <CommentsTree parentId={item.id} level={level + 1}/>
+        <Comment key={item.id} item={item} >
+          <CommentsTree parentId={item.id} />
         </Comment>
       ))}
     </ul>
